@@ -43,11 +43,11 @@ cat <<EOF > /mnt/script.sh
 pacman -Sy --noconfirm grub os-prober sudo
 
 echo "Configuration hostname..."
-echo "sylviot" > /etc/hostname
+echo "hermesautran" > /etc/hostname
 
-useradd -m -G wheel,users -s /bin/bash sylviot
+useradd -m -G wheel,users -s /bin/bash hermesautran
 sed -i -r 's/^#.(%wheel.[^PSWD]*$)/\1/' /etc/sudoers
-passwd sylviot
+passwd hermesautran
 
 locale >/etc/locale.conf
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
