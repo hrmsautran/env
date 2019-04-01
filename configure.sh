@@ -50,12 +50,12 @@ configure_desktop() {
   sudo systemctl enable lightdm
   
   # Download Rele Theme
-  #curl -o /tmp/rele.tar.bz2 https://dl.opendesktop.org/api/files/downloadfile/id/1462392025/s/947eec5cfb08c2bb291190370343f799/t/1527263464/u/60272/77260-rele-xfce4.tar.bz2
-  #tar -xjvf /tmp/rele.tar.bz2
-  #sudo cp -R /tmp/Rele /usr/share/themes/Rele
+  curl -o /tmp/rele.tar.bz2 https://dl.opendesktop.org/api/files/downloadfile/id/1462392025/s/947eec5cfb08c2bb291190370343f799/t/1527263464/u/60272/77260-rele-xfce4.tar.bz2
+  tar -xjvf /tmp/rele.tar.bz2
+  sudo cp -R /tmp/Rele /usr/share/themes/Rele
 
-  #download image backgroud
-  #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /temp/background.jpg
+  # download image backgroud
+  # xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /temp/background.jpg
 }
 
 configure_docker() {
@@ -68,16 +68,14 @@ configure_docker() {
   sudo ln -s ~/env/bin/* /usr/local/bin/
 }
 
-configure_zsh() {
+configure_oh_my_zsh() {
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    print "Configuring oh-my-zsh..."
-    git clone --depth=1 https://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
-    cp $HOME/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   fi
   
   if [ ! -z "`echo $SHELL | grep zsh`" ]; then
     print "Configuring zsh..."
-    sudo chsh -s $(which zsh)
+    chsh $USER -s $(which zsh)
   fi
 }
 
@@ -88,7 +86,7 @@ install_arch() {
   install_utils
   
   configure_desktop
-  configure_zsh
+  configure_oh_my_zsh
   configure_docker
   
 }
