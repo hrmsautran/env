@@ -62,35 +62,10 @@ configure_docker() {
   print "Configuring docker..."
   #if [-n "`systemctl is-enabled docker | grep disabled`"]; then
   sudo systemctl enable docker
-  sudo usermod -aG docker sylviot
+  sudo usermod -aG docker hermesautran
 
   print "Configuring docker bin..."
   sudo ln -s ~/env/bin/* /usr/local/bin/
-}
-
-configure_vim() {
-  print "Configuring vim..."
-
-  if [ ! -d "$HOME/.vim/bundle/Vundle.vim" ]; then
-    print "Configuring Vundle..."
-    git clone https://github.com/VundleVim/Vundle.vim ~/.vim/bundle/Vundle.vim
-  fi
-
-  if [ ! -s "$HOME/.vimrc" ]; then
-    print "Configuring .vimrc..."
-    git clone https://github.com/sylviot/dot.git $HOME/dot
-    sudo ln -s $HOME/dot/.vimrc $HOME/.vimrc
-  fi
-
-  print "Install/Update Vundle plugins..."
-  vim +VundleInstall +qall &> /dev/null
-
-  if [ -z "`ls $HOME/.local/share/fonts/ | grep Powerline`" ]; then
-    print "Installing powerline fonts..."
-    git clone https://github.com/powerline/fonts.git /tmp/powerline-fonts &&
-    cd /tmp/powerline-fonts &&
-    ./install.sh
-  fi
 }
 
 configure_zsh() {
@@ -113,7 +88,6 @@ install_arch() {
   install_utils
   
   configure_desktop
-  configure_vim
   configure_zsh
   configure_docker
   
