@@ -59,7 +59,7 @@ configure_desktop() {
   rm -rf /tmp/tintedarc.zip
   sudo -s ./desktop-mode --setup
   desktop-mode --night
-  
+
   # download image backgroud
   # xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /temp/background.jpg
 }
@@ -92,8 +92,8 @@ install_arch() {
   install_utils
   
   configure_desktop
-  configure_oh_my_zsh
   configure_docker
+  configure_oh_my_zsh
   
 }
 
