@@ -18,7 +18,7 @@ install_xfce4() {
   
   PACKAGES="xorg-server xorg-xinit xorg-twm xorg-xclock xterm xfce4 lightdm "
   PACKAGES+="xf86-input-mouse xf86-input-keyboard xf86-video-vesa "
-  PACKAGES+="wget htop git vim zsh bash-completion ctags docker unrar unzip "
+  PACKAGES+="wget htop git vim zsh bash-completion ctags docker unrar "
   # PACKAGES+="qemu-kvm qemu virt-manager virt-viewer libvirt-bin "
   #PACKAGES+="chromium firefox opera vlc clementine"
 
@@ -50,18 +50,12 @@ configure_desktop() {
   sudo systemctl enable lightdm
   
   # Download Rele Theme
-  # curl -o /tmp/rele.tar.bz2 https://dl.opendesktop.org/api/files/downloadfile/id/1462392025/s/947eec5cfb08c2bb291190370343f799/t/1527263464/u/60272/77260-rele-xfce4.tar.bz2
-  # tar -xjvf /tmp/rele.tar.bz2
-  # sudo cp -R /tmp/Rele /usr/share/themes/Rele
+  #curl -o /tmp/rele.tar.bz2 https://dl.opendesktop.org/api/files/downloadfile/id/1462392025/s/947eec5cfb08c2bb291190370343f799/t/1527263464/u/60272/77260-rele-xfce4.tar.bz2
+  #tar -xjvf /tmp/rele.tar.bz2
+  #sudo cp -R /tmp/Rele /usr/share/themes/Rele
 
-  curl -o /tmp/tintedarc.zip https://github.com/nizarmah/tintedarc/archive/master.zip
-  unzip /tmp/tintedarc.zip -d /tmp/tintedarc
-  rm -rf /tmp/tintedarc.zip
-  sudo -s ./desktop-mode --setup
-  desktop-mode --night
-
-  # download image backgroud
-  # xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /temp/background.jpg
+  #download image backgroud
+  #xfconf-query -c xfce4-desktop -p /backdrop/screen0/monitor0/workspace0/last-image -s /temp/background.jpg
 }
 
 configure_docker() {
@@ -74,7 +68,7 @@ configure_docker() {
   sudo ln -s ~/env/bin/* /usr/local/bin/
 }
 
-configure_oh_my_zsh() {
+configure_zsh() {
   if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   fi
@@ -93,8 +87,7 @@ install_arch() {
   
   configure_desktop
   configure_docker
-  configure_oh_my_zsh
-  
+  configure_zsh
 }
 
 print () {
